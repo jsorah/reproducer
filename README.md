@@ -1,3 +1,12 @@
+# Steps to reproduce:
+
+1. Build this with Quarkus bom Version 2.5.0.CR1 (maven plugin was not available for 2.5 final yet, but bug also appears to 2.5.0.CR1)
+2. run devmode, open localhost:8080/res/patternfly.css (or /keycloak-logo.png or jquery.js) -> see cut-off content / damaged image.
+3. open localhost:8080/fixed/patternfly.css -> see content as it should be
+
+To have a working res/... you can build the project with 2.4.2.Final 
+
+
 # reproducer Project
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.

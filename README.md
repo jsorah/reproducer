@@ -1,10 +1,10 @@
 # Steps to reproduce:
 
-1. Build this with Quarkus bom Version 2.5.0.CR1 (maven plugin was not available for 2.5 final yet, but bug also appears to 2.5.0.CR1)
-2. run devmode, open localhost:8080/res/patternfly.css (or /keycloak-logo.png or jquery.js) -> see cut-off content / damaged image.
-3. open localhost:8080/fixed/patternfly.css -> see content as it should be
-
-To have a working res/... you can build the project with 2.4.2.Final 
+1. Create some certificates (e.g. selfsigned or using mkcert)
+2. set them in quarkus.properties 
+3. Build,run & open https://localhost:8443/ in your browser 
+4. simulate high request traffic _without browser caching_ - on my mac it's e.g. holding `cmd+shift+r`, See https://en.wikipedia.org/wiki/Wikipedia:Bypass_your_cache#Desktop_browsers for other browsers and OS
+5. See exception appear
 
 
 # reproducer Project

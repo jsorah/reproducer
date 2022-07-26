@@ -1,14 +1,20 @@
 package com.example;
 import org.jboss.logging.Logger;
+import org.jboss.resteasy.spi.HttpRequest;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import java.io.InputStream;
 
 @Path("/hello")
 public class ExampleResource {
     protected static final Logger logger = Logger.getLogger(ExampleResource.class);
+
+    @Context
+    private HttpRequest request;
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
@@ -53,5 +59,13 @@ public class ExampleResource {
         } catch (Exception e) {
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @POST
+    public Response processPostFormRequest() {
+        MultivaluedMap<String, String> formParameters = request.getDecodedFormParameters();
+        var grantType = formParameters.getFirst("grant_type");
+        return Response.ok("Grant type is: " + grantType, MediaType.APPLICATION_JSON_TYPE).build();
     }
 }
